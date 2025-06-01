@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function App() {
   const [character1Name, setCharacter1Name] = useState('');
