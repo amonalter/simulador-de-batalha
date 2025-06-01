@@ -49,7 +49,7 @@ function App() {
         };
       }
 
-      // API Key placeholder - Replace with your actual Gemini API Key
+      // SUA CHAVE DE API GEMINI REAL FOI INSERIDA AQUI
       const apiKey = "AIzaSyByREQJYWCdMkEqfnNTDFYBjFH8VuDbx0w"; 
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
@@ -119,7 +119,14 @@ function App() {
     const char1Ref = char1.type === 'group' ? `o grupo ${char1.characterName}` : char1.characterName;
     const char2Ref = char2.type === 'group' ? `o grupo ${char2.characterName}` : char2.characterName;
 
-    const prompt = `Simule uma batalha detalhada em texto entre ${char1Ref} (Força: ${char1.stats.strength}, Inteligência: ${char1.stats.intelligence}, Estratégia: ${char1.stats.strategy}, Agilidade: ${char1.stats.agility}, Durabilidade: ${char1.stats.durability}, Habilidade Especial: ${char1.stats.specialAbility}. Descrição: ${char1.description}) e ${char2Ref} (Força: ${char2.stats.strength}, Inteligência: ${char2.stats.intelligence}, Estratégia: ${char2.stats.strategy}, Agilidade: ${char2.stats.agility}, Durabilidade: ${char2.stats.durability}, Habilidade Especial: ${char2.stats.specialAbility}. Descrição: ${char2.description}). Descreva os turnos, as ações baseadas em suas estatísticas e habilidades. Ao final, declare claramente o vencedor com a frase "O VENCEDOR É: [Nome do Vencedor]". A batalha deve ser emocionante e baseada nas características dos combatentes, com um mínimo de 200 palavras.`;
+    const prompt = `Instruções para a Simulação de Batalha:
+- A batalha deve ser 100% imparcial.
+- O resultado deve ser estritamente baseado nas estatísticas e habilidades dos combatentes, sem favorecer a ordem de apresentação.
+- O combate deve ser dinâmico, descrevendo turnos e ações lógicas.
+- Ao final, declare CLARAMENTE o vencedor com a frase "O VENCEDOR É: [Nome do Vencedor]".
+- A narrativa deve ter no mínimo 200 palavras.
+
+Simule uma batalha detalhada em texto entre ${char1Ref} (Força: ${char1.stats.strength}, Inteligência: ${char1.stats.intelligence}, Estratégia: ${char1.stats.strategy}, Agilidade: ${char1.stats.agility}, Durabilidade: ${char1.stats.durability}, Habilidade Especial: ${char1.stats.specialAbility}. Descrição: ${char1.description}) e ${char2Ref} (Força: ${char2.stats.strength}, Inteligência: ${char2.stats.intelligence}, Estratégia: ${char2.stats.strategy}, Agilidade: ${char2.stats.agility}, Durabilidade: ${char2.stats.durability}, Habilidade Especial: ${char2.stats.specialAbility}. Descrição: ${char2.description}).`;
     return await callGeminiApi(prompt);
   };
 
@@ -162,39 +169,17 @@ function App() {
     }
   };
 
-  // useEffect para carregar os anúncios do AdSense
-  useEffect(() => {
-    // A declaração window.adsbygoogle é criada pelo script do AdSense no index.html.
-    // Garantimos que ela exista antes de tentar usar o push.
-    // Para projetos JavaScript, não precisamos de 'declare global' aqui.
-    if (typeof window !== 'undefined' && window.adsbygoogle) { // Adicionado 'typeof window !== 'undefined'' para segurança
-      try {
-        window.adsbygoogle = window.adsbygoogle || [];
-        window.adsbygoogle.push({});
-        console.log("AdSense push triggered.");
-      } catch (e) {
-        console.error("Error pushing AdSense ads:", e);
-      }
-    } else {
-      console.warn("AdSense script not loaded yet or window not defined.");
-    }
-  }, []); // Array de dependências vazio para rodar apenas uma vez ao montar
+  // NENHUM useEffect ESPECÍFICO PARA ADSENSE AQUI, POIS O SCRIPT NO INDEX.HTML GERE TUDO AUTOMATICAMENTE.
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-700 text-white p-4 font-inter flex flex-col items-center">
       <div className="flex flex-col md:flex-row md:justify-center md:items-start md:space-x-6 lg:space-x-12 w-full max-w-7xl">
 
-        {/* Left Sidebar for Ads */}
-        <div className="ad-sidebar-left hidden md:flex flex-col items-center p-4 rounded-lg bg-gray-800 shadow-lg border border-gray-600 flex-shrink-0" style={{ minWidth: '160px', width: '15%' }}>
-            <p className="text-gray-400 text-sm mb-2">Anúncio</p>
-            <ins className="adsbygoogle"
-                 style={{ display: 'block', width: '160px', height: '600px' }}
-                 data-ad-client="ca-pub-YOUR_ADSENSE_PUBLISHER_ID" // <<<<<<<<<<<<<<<<<<<<<< SUBSTITUA AQUI!
-                 data-ad-slot="YOUR_ADSENSE_SLOT_ID_LEFT"></ins>
-        </div>
+        {/* Removido o Left Sidebar para Ads, pois o AdSense automático gerencia o posicionamento. */}
+        {/* Removido o Right Sidebar para Ads, pois o AdSense automático gerencia o posicionamento. */}
 
-        {/* Main Content Area */}
-        <div className="container mx-auto p-6 bg-gray-800 rounded-xl shadow-2xl flex-grow max-w-4xl">
+        {/* Main Content Area - O conteúdo principal agora ocupa a largura total disponível. */}
+        <div className="container mx-auto p-6 bg-gray-800 rounded-xl shadow-2xl flex-grow max-w-4xl w-full">
           <h1 className="text-4xl font-extrabold text-center mb-8 text-purple-400 drop-shadow-lg">
             Simulador de Batalha de Personagens
           </h1>
@@ -281,7 +266,7 @@ function App() {
 
           {character1Stats && character2Stats && (
             <div className="col-span-full mb-8">
-              <h2 className="text-3xl font-bold text-center mb-6 text-yellow-300">Estatísticas dos Personagens</h2>
+              <h2 className="text-3xl font-bold mb-4 text-center text-yellow-300">Estatísticas dos Personagens</h2>
               <div className="flex justify-center gap-8 mb-4"> {/* Avatares at the top */}
                   <div className="flex flex-col items-center">
                       <img
@@ -309,7 +294,7 @@ function App() {
                   {/* Descriptions in columns */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <p className="text-gray-300 italic text-center p-2 rounded-md bg-gray-900">{character1Stats.description}</p>
-                      <p className="text-300 italic text-center p-2 rounded-md bg-gray-900">{character2Stats.description}</p>
+                      <p className="text-gray-300 italic text-center p-2 rounded-md bg-gray-900">{character2Stats.description}</p>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2 text-center font-semibold text-gray-200 mb-2 border-b border-gray-600 pb-2">
@@ -364,16 +349,12 @@ function App() {
             )}
           </div>
 
-          {/* Right Sidebar for Ads */}
-          <div className="ad-sidebar-right hidden md:flex flex-col items-center p-4 rounded-lg bg-gray-800 shadow-lg border border-gray-600 flex-shrink-0" style={{ minWidth: '160px', width: '15%' }}>
-              <p className="text-gray-400 text-sm mb-2">Anúncio</p>
-              <ins className="adsbygoogle"
-                   style={{ display: 'block', width: '160px', height: '600px' }}
-                   data-ad-client="ca-pub-YOUR_ADSENSE_PUBLISHER_ID" // <<<<<<<<<<<<<<<<<<<<<< SUBSTITUA AQUI!
-                   data-ad-slot="YOUR_ADSENSE_SLOT_ID_RIGHT"></ins>
-          </div>
+          {/* Right Sidebar for Ads - REMOVIDO PARA ADS AUTOMATICOS */}
+          {/* Removido o Left Sidebar para Ads, pois o AdSense automático gerencia o posicionamento. */}
+          {/* Removido o Right Sidebar para Ads, pois o AdSense automático gerencia o posicionamento. */}
         </div>
       </div>
   );
 }
+
 export default App;
