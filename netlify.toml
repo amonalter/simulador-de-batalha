@@ -1,0 +1,4 @@
+[[plugins]]
+  package = "netlify-plugin-prerender-spa"
+  [plugins.inputs]
+    paths = ["/"] # Pré-renderiza apenas a página inicial. Adicione mais caminhos se seu site tiver outras "páginas" via rotas.
