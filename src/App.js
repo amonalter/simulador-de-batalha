@@ -259,10 +259,34 @@ Simule uma batalha detalhada em texto entre ${char1Ref} (Força: ${char1.stats.s
           </button>
 
           {errorMessage && (
-            <div className="bg-red-500 text-white p-4 rounded-md mb-8 text-center font-semibold">
-              {errorMessage}
-            </div>
-          )}
+        <div className="bg-red-500 text-white p-4 rounded-md mb-8 text-center font-semibold">
+          {errorMessage}
+        </div>
+      )}
+
+      {/* NOVO BLOCO DE CONTEÚDO ESTÁTICO - INÍCIO */}
+      <div className="bg-gray-700 p-6 rounded-lg shadow-inner border border-gray-600 mb-8">
+        <h2 className="text-2xl font-bold text-center mb-4 text-purple-300">Sobre o Simulador de Batalha</h2>
+        <p className="text-gray-300 mb-4 leading-relaxed">
+          Bem-vindo ao Simulador de Batalha de Personagens! Aqui, a imaginação encontra a inteligência artificial para criar confrontos épicos. Basta inserir o nome de dois personagens ou equipes de suas obras fictícias favoritas, e nossa IA gerará estatísticas detalhadas de RPG para cada um, como Força, Inteligência e Habilidades Especiais. Em seguida, uma simulação de batalha imparcial será gerada em texto, culminando na declaração de um vencedor. Prepare-se para ver seus heróis e vilões favoritos em duelos inesquecíveis!
+        </p>
+        <h3 className="text-xl font-bold text-center mb-3 text-blue-300">Como Usar</h3>
+        <ul className="list-disc list-inside text-gray-300 space-y-2">
+          <li>No campo "Personagem 1", digite o nome do primeiro combatente e a obra fictícia de onde ele vem.</li>
+          <li>No campo "Personagem 2", faça o mesmo para o segundo combatente.</li>
+          <li>Você pode usar nomes de grupos famosos (como "Cavaleiros de Ouro" ou "Liga da Justiça") para simular batalhas entre equipes.</li>
+          <li>Clique em "Simular Batalha" e aguarde a IA gerar as estatísticas e a narrativa do confronto.</li>
+          <li>O resultado da batalha e o vencedor serão exibidos logo abaixo.</li>
+        </ul>
+      </div>
+      {/* NOVO BLOCO DE CONTEÚDO ESTÁTICO - FIM */}
+
+      {character1Stats && character2Stats && ( // ESTE É O BLOCO QUE EXIBE AS ESTATÍSTICAS E LOG
+        <div className="col-span-full mb-8">
+          <h2 className="text-3xl font-bold text-center mb-6 text-yellow-300">Estatísticas dos Personagens</h2>
+          {/* ... resto do código das estatísticas e log ... */}
+        </div>
+      )}
 
           {character1Stats && character2Stats && (
             <div className="col-span-full mb-8">
